@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientConvertisseurV2.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,11 +33,6 @@ namespace ClientConvertisseurV2
             this.Suspending += OnSuspending;
         }
 
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Invoqué lorsque l'application est lancée normalement par l'utilisateur final.  D'autres points d'entrée
         /// seront utilisés par exemple au moment du lancement de l'application pour l'ouverture d'un fichier spécifique.
@@ -61,7 +57,7 @@ namespace ClientConvertisseurV2
                 }
 
                 // Placez le frame dans la fenêtre active
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = new RootPage(rootFrame);
             }
 
             if (e.PrelaunchActivated == false)

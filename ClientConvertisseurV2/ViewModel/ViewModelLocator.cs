@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿    using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,12 @@ namespace ClientConvertisseurV2.ViewModel
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
                 SimpleIoc.Default.Register<MainViewModel>();
-            }
-            /// <summary>
-            /// Gets the Main property.
-            /// </summary>
-            public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+                SimpleIoc.Default.Register<SecondViewModel>();
         }
+        /// <summary>
+        /// Gets the Main property.
+        /// </summary>
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public SecondViewModel Second => ServiceLocator.Current.GetInstance<SecondViewModel>();
+    }
 }

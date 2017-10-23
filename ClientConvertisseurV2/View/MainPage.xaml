@@ -5,9 +5,19 @@
     xmlns:local="using:ClientConvertisseurV2.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="MontantEuro" HorizontalAlignment="Center" Height="21" TextWrapping="Wrap" Text="Montant en Euros" VerticalAlignment="Top" Width="135" Margin="105,43,-178.333,-44" TextAlignment="Center"/>
+        <TextBlock x:Name="Devise" HorizontalAlignment="Center" Height="21" TextWrapping="Wrap" Text="Devise" VerticalAlignment="Top" Width="135" Margin="105,109,-178.333,-110" TextAlignment="Center"/>
+        <TextBlock x:Name="MontantDevise" HorizontalAlignment="Center" Height="21" TextWrapping="Wrap" Text="Montant en Devise" VerticalAlignment="Top" Width="135" Margin="105,263,-178.333,-264" TextAlignment="Center">
+        </TextBlock>
+        <ComboBox x:Name="ComboDevise" ItemsSource="{Binding ComboBoxDevises}" SelectedValuePath="Id" DisplayMemberPath="Nom" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="135" Margin="105,135,-176,-135" SelectedItem="{Binding ComboBoxDeviseItem, Mode=TwoWay}"/>
+        <TextBox x:Name="TextEuro"  Text="{Binding MontantEuros, Mode=TwoWay}" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Margin="105,64,-169,-64" TextAlignment="Center"/>
+        <TextBox x:Name="TextDevise" Text="{Binding MontantCalcul, Mode=OneWay}" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Margin="105,289,-169,-289" IsReadOnly="True" TextAlignment="Center"/>
+        <Button x:Name="Conv" Content="Convertir" Command="{Binding BtnSetConversion}" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="135" Margin="105,200,-175.667,-200"/>
 
-    </Grid>
+        <Button x:Name="changeConv" Content="Changer de convertisseur" Command="{Binding BtnChangeConverter}" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="135" Margin="105,608,-175.667,-608" FontSize="10"/>
+    </RelativePanel>
 </Page>

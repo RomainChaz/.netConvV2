@@ -11,17 +11,17 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Popups;
 
 namespace ClientConvertisseurV2.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class SecondViewModel : ViewModelBase
     {
         private ObservableCollection<Devise> _comboBoxDevises;
         private string _montantEuros;
-        private string _montantCalcul;
+        private string _valDevise;
         private Devise _montantDevise;
         public ICommand BtnSetConversion { get; private set; }
         public ICommand BtnChangeConverter { get; private set; }
@@ -36,10 +36,11 @@ namespace ClientConvertisseurV2.ViewModel
             }
         }
 
-        public MainViewModel()
+        public SecondViewModel()
         {
             ActionGetData();
             BtnSetConversion = new RelayCommand(ActionSetConversion);
+
             BtnChangeConverter = new RelayCommand(ActionChangeConvertisseur);
         }
         private async void ActionGetData()
@@ -50,23 +51,21 @@ namespace ClientConvertisseurV2.ViewModel
 
         private void ActionSetConversion()
         {
-
             Boolean error = false;
             String errorMessage = "";
             Regex regex = new Regex(@"[\d]");
-            if (_montantDevise == null || _montantEuros == null)
+            if (_valDevise == null || _montantDevise == null)
             {
                 error = true;
                 errorMessage = "Veuillez remplir tout les champs.";
             }
-            else if (!regex.IsMatch(_montantEuros))
-            {
+            else if(!regex.IsMatch(_valDevise)){
                 error = true;
                 errorMessage = "La valeur doit etre un chiffre.";
             }
             else
             {
-                this.MontantCalcul = Convert.ToString(_montantDevise.Taux * Double.Parse(_montantEuros));
+                this.MontantEuros = Convert.ToString(Double.Parse(_valDevise) / _montantDevise.Taux); 
             }
 
             if (error)
@@ -82,13 +81,12 @@ namespace ClientConvertisseurV2.ViewModel
             await message.ShowAsync();
         }
 
-
-        public string MontantCalcul
+        public string ValDevise
         {
-            get { return _montantCalcul; }
+            get { return _valDevise; }
             set
             {
-                _montantCalcul = value;
+                _valDevise = value;
                 RaisePropertyChanged();
             }
         }
@@ -116,7 +114,7 @@ namespace ClientConvertisseurV2.ViewModel
         {
             RootPage r = (RootPage)Window.Current.Content;
             SplitView sv = (SplitView)(r.Content);
-            (sv.Content as Frame).Navigate(typeof(SecondPage));
+            (sv.Content as Frame).Navigate(typeof(MainPage));
         }
 
     }

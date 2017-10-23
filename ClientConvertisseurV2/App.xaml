@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ClientConvertisseurV2"
     xmlns:vm="using:ClientConvertisseurV2.ViewModel"
-    RequestedTheme="Light">
-
+    RequestedTheme="Dark">
+    
     <Application.Resources>
         <!--Global View Model Locator-->
         <vm:ViewModelLocator x:Key="Locator"/>
